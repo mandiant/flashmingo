@@ -1,0 +1,8 @@
+# Copyright(C) 2019 FireEye, Inc. All Rights Reserved.
+#
+# This is a template for easy development
+
+name: SuspiciousConstants
+active: yes
+description: This looks for suspicious constant values
+returns: A list of suspicious constants

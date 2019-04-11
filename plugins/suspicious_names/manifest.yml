@@ -1,0 +1,8 @@
+# Copyright(C) 2019 FireEye, Inc. All Rights Reserved.
+#
+# This is a template for easy development
+
+name: SuspiciousNames
+active: yes
+description: It finds suspicious names in methods, constants, etc.
+returns: A list of suspicious names found in the constant pools (all ABC tags)

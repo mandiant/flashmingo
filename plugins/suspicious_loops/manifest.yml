@@ -1,0 +1,8 @@
+# Copyright(C) 2019 FireEye, Inc. All Rights Reserved.
+#
+# Find suspicious constructs within loops
+
+name: SuspiciousLoops
+active: yes
+description: Find suspicious constructs within loops
+returns: A list of methods doing sneaky things

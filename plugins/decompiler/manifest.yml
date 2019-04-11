@@ -1,0 +1,8 @@
+# Copyright(C) 2019 FireEye, Inc. All Rights Reserved.
+#
+# Decompiler plugin
+
+name: Decompiler
+active: yes
+description: Leverages FFDEC library to decompile SWF methods
+returns: a dictionary d[method name] = decompiled_method_text

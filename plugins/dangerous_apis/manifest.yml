@@ -1,0 +1,8 @@
+# Copyright(C) 2019 FireEye, Inc. All Rights Reserved.
+#
+# YAML is easy peasy
+
+name: DangerousAPIs
+active: yes
+description: This looks for APIs known to be abused, for example direct memory access
+returns: A set of tuples (name of AS3 module, dangerous instruction)

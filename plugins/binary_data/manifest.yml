@@ -1,0 +1,8 @@
+# Copyright(C) 2019 FireEye, Inc. All Rights Reserved.
+#
+# BinaryData manifest file
+
+name: BinaryData
+active: yes
+description: Searches embedded binary data for a given pattern
+returns: A dictionary of class names and pattern offsets
