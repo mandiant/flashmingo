@@ -94,9 +94,9 @@ class Plugin:
             self.ml.error("Run decompiler plugin first!")
             return
 
-        for cve, hints in cve_hints.iteritems():
-            for abc_name, decompiled_text in self.swf.decompiled_methods.iteritems():
-                for mo_idx, method_dec in decompiled_text.iteritems():
+        for cve, hints in cve_hints.items():
+            for abc_name, decompiled_text in self.swf.decompiled_methods.items():
+                for mo_idx, method_dec in decompiled_text.items():
                     # Keep track of the substrings found
                     for hint in hints[:]:  # deepcopy
                         if hint in method_dec:

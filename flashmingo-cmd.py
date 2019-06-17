@@ -37,12 +37,12 @@ class FlashmingoCmd(cmd2.Cmd):
     def preloop(self):
         """ Banner """
 
-        print flashmingo_banner
+        print(flashmingo_banner)
 
     def postloop(self):
         """ Exit message """
 
-        print flashcmd_goodbye
+        print(flashcmd_goodbye)
 
     # --------------------------------------------
     # Command Handlers
@@ -56,17 +56,17 @@ class FlashmingoCmd(cmd2.Cmd):
 
         try:
             self.swf = SWFObject(sample_file, ml=self.logger)
-            print "[*] Sample {} loaded!".format(sample_file)
+            print("[*] Sample {} loaded!".format(sample_file))
         except IOError as e:
-            print "[x] Sample {} could not be loaded: {}".format(sample_file, e)
+            print("[x] Sample {} could not be loaded: {}".format(sample_file, e))
 
     def do_show_plugins(self, args):
         """show_plugins
         - Display information about the available (active) plugins
         """
 
-        print
-        print self.fm.show_active_plugins()
+        print()
+        print(self.fm.show_active_plugins())
 
     def do_run_plugin(self, plugin_name):
         """run_plugin <plugin_name>
@@ -74,13 +74,13 @@ class FlashmingoCmd(cmd2.Cmd):
         """
 
         if not self.swf:
-            print "[x] No sample loaded! Use the 'load' command first"
+            print("[x] No sample loaded! Use the 'load' command first")
             return
 
         output = self.fm.run_plugin(plugin_name, swf=self.swf)
-        print output
+        print(output)
 
-        self.plugins_done.add(plugin_name)
+        self.plugins_done.add(str(plugin_name))
 
     def do_decompile(self, args):
         """decompile
@@ -90,20 +90,20 @@ class FlashmingoCmd(cmd2.Cmd):
         """
 
         if not self.swf:
-            print "[x] No sample loaded! Use the 'load' command first"
+            print("[x] No sample loaded! Use the 'load' command first")
             return
 
         dec = self.fm.run_plugin('Decompiler', swf=self.swf)
 
         if not dec:
-            print "[x] Decompilation did not produce any results!"
+            print("[x] Decompilation did not produce any results!")
             return
 
         # The decompiler's output will be used normally 
         # to enrich the SWFObject, like this:
         self.swf.decompiled_methods = dec
         self.has_decompilation = True
-        print "[*] Decompilation available now."
+        print("[*] Decompilation available now.")
 
         self.plugins_done.add('Decompiler')
 
@@ -117,29 +117,29 @@ class FlashmingoCmd(cmd2.Cmd):
         # command for convenience
 
         if not self.swf:
-            print "[x] No sample loaded! Use the 'load' command first"
+            print("[x] No sample loaded! Use the 'load' command first")
             return
 
         meth_loop = self.fm.run_plugin('SuspiciousLoops', swf=self.swf)
 
-        print "The following methods contain suspicious loops."
-        print "This may indicate encryption/encoding routines..."
-        print
+        print("The following methods contain suspicious loops.")
+        print("This may indicate encryption/encoding routines...")
+        print()
 
         for method_name in meth_loop:
             instance_name = self.swf.get_instance_for_method(method_name)
             if instance_name:
-                print " - {}!{}".format(instance_name, method_name)
+                print(" - {}!{}".format(instance_name, method_name))
             else:
-                print " - {}".format(method_name)
+                print(" - {}".format(method_name))
 
             if self.has_decompilation:
                 try:
-                    print "-" * 50
-                    print
-                    print self.swf.decompile_method(method_name)
+                    print("-" * 50)
+                    print()
+                    print(self.swf.decompile_method(method_name))
                 except Exception as e:
-                    print "[x] Unable to decompile {}".format(method_name)
+                    print("[x] Unable to decompile {}".format(method_name))
 
         self.plugins_done.add('SuspiciousLoops')
 
@@ -149,22 +149,22 @@ class FlashmingoCmd(cmd2.Cmd):
         """
 
         if not self.swf:
-            print "[x] No sample loaded! Use the 'load' command first"
+            print("[x] No sample loaded! Use the 'load' command first")
             return
 
-        print "Sample file:", self.swf.filename
-        print
-        print "Embedded binary data:"
-        for name, data in self.swf.binary_data.iteritems():
-            print " - {} ({} bytes)".format(name, len(data))
+        print("Sample file:", self.swf.filename)
+        print()
+        print("Embedded binary data:")
+        for name, data in self.swf.binary_data.items():
+            print(" - {} ({} bytes)".format(name, len(data)))
 
-        print
-        print "Plugins already executed:"
+        print()
+        print("Plugins already executed:")
         if not self.plugins_done:
-            print " - No plugins executed yet"
+            print(" - No plugins executed yet")
         else:
             for p in self.plugins_done:
-                print " - {}".format(p)
+                print(" - {}".format(p))
 
     # --------------------------------------------
     # Auxiliary
@@ -189,8 +189,8 @@ class FlashmingoCmd(cmd2.Cmd):
 
             return ml
         except Exception as e:
-            print "Error initializing logging:"
-            print e
+            print("Error initializing logging:")
+            print(e)
             return None
 
 

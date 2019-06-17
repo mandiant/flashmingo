@@ -65,7 +65,7 @@ class Plugin:
 
         instances = self.swf.instance_info
 
-        for class_name, instance_info in instances.iteritems():
+        for class_name, instance_info in instances.items():
             methods = instance_info['methods']
 
             for method_name in methods:

@@ -11,7 +11,7 @@ import logging
 import logging.handlers
 import yaml
 
-from resources import flashmingo_banner
+from .resources import flashmingo_banner
 
 
 class Flashmingo:
@@ -47,7 +47,7 @@ class Flashmingo:
             # Flashmingo will use its own
             self.ml = self._init_logging()
             if not self.ml:
-                print "Failed to initialize logging. Exiting..."
+                print("Failed to initialize logging. Exiting...")
                 sys.exit(1)
 
         self.cfg = self._read_config()
@@ -83,8 +83,8 @@ class Flashmingo:
 
             return ml
         except Exception as e:
-            print "Error initializing logging:"
-            print e
+            print("Error initializing logging:")
+            print(e)
             return None
 
     def _read_config(self):
@@ -184,7 +184,7 @@ class Flashmingo:
         "minimalistic wrapper".
         """
 
-        print flashmingo_banner
+        print(flashmingo_banner)
 
     def show_active_plugins(self):
         """Convenience wrapper.
@@ -192,18 +192,18 @@ class Flashmingo:
         Displays a list of active plugins names
         """
 
-        print "Active plugins"
-        print "--------------"
-        print
+        print("Active plugins")
+        print("--------------")
+        print()
 
         for p in self.plugins:
             if not p:
                 continue
 
-            print "Plugin name: {}".format(p['name'])
-            print "  - desc: {}".format(p['description'])
-            print "  - returns: {}".format(p['returns'])
-            print
+            print("Plugin name: {}".format(p['name']))
+            print("  - desc: {}".format(p['description']))
+            print("  - returns: {}".format(p['returns']))
+            print()
 
     def run_plugin(self, plugin_name, swf=None, logger=None, **kwargs):
         """Run an active plugin

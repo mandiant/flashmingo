@@ -6,12 +6,12 @@
 
 
 def test_multinames(swf):
-    print "Getting MultiNames information..."
+    print("Getting MultiNames information...")
 
-    for mn_ns, mn_items in swf.multinames.iteritems():
-        print "MultiNAME ({})".format(mn_ns)
-        print ", ".join(mn_items)
-        print
+    for mn_ns, mn_items in swf.multinames.items():
+        print("MultiNAME ({})".format(mn_ns))
+        print(", ".join(mn_items))
+        print()
 
 
 def test_method(swf, method_name):
@@ -23,27 +23,27 @@ def test_method(swf, method_name):
 
     mo = swf.get_method_obj_by_name(method_name)
     if not mo:
-        print "[!] Could not find method {}".format(method_name)
+        print("[!] Could not find method {}".format(method_name))
         return
 
-    print "Method information for {}".format(method_name)
-    print
-    print "{} ({} params, {} locals): {} [idx: {}]".format(
-        mo.name, mo.param_count, mo.local_count, mo.return_type, mo.idx)
+    print("Method information for {}".format(method_name))
+    print()
+    print("{} ({} params, {} locals): {} [idx: {}]".format(
+        mo.name, mo.param_count, mo.local_count, mo.return_type, mo.idx))
 
-    print "Decompilation"
-    print
-    print swf.decompile_method(method_name)
+    print("Decompilation")
+    print()
+    print(swf.decompile_method(method_name))
 
-    print "Function calls"
-    print
+    print("Function calls")
+    print()
     for call in swf.get_function_calls(method_name):
-        print call
+        print(call)
 
-    print "Raw Disassembly"
-    print
+    print("Raw Disassembly")
+    print()
     for ins in swf.disassemble_method(method_name):
-        print ins
+        print(ins)
 
 
 def test_instances(swf, instance_name=''):
@@ -59,24 +59,24 @@ def test_instances(swf, instance_name=''):
         None
     """
 
-    print "Getting instance information..."
+    print("Getting instance information...")
 
-    for name, ii in swf.instance_info.iteritems():
+    for name, ii in swf.instance_info.items():
         if instance_name and name != instance_name:
             continue
 
-        print "instance ({})".format(name)
-        print ii
-        print
+        print("instance ({})".format(name))
+        print(ii)
+        print()
 
 
 def test_namespaces(swf):
     """Simple wrapper to display Namespaces data
     """
-    print "Getting Namespaces information..."
+    print("Getting Namespaces information...")
 
     for kind, name in swf.namespaces:
-        print kind, name
+        print(kind, name)
 
 
 def test_debug_method(swf, method_name):
@@ -84,11 +84,11 @@ def test_debug_method(swf, method_name):
 
     This is useful during development mainly
     """
-    print "Debug disassembly"
+    print("Debug disassembly")
     mo = swf.get_method_obj_by_name(method_name)
 
     offset = 0
     for ins in mo.instructions:
-        print "[{} ({})]".format(offset, ins._size + 1)
+        print("[{} ({})]".format(offset, ins._size + 1))
         swf.debug_instruction(ins)
         offset += ins._size + 1

@@ -74,7 +74,7 @@ class Plugin:
 
         found_pattern = {}
 
-        for class_name, data in self.swf.binary_data.iteritems():
+        for class_name, data in self.swf.binary_data.items():
             self.ml.debug("Inspecting {}'s binary data".format(class_name))
 
             offset = data.find(self.pattern)

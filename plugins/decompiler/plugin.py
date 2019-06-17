@@ -81,7 +81,7 @@ class Plugin:
             ],
                 cwd=plugin_loc)
         except Exception as e:
-            print "[x] Decompilation subprocess failed!"
+            print("[x] Decompilation subprocess failed!")
             return
 
         input_file = os.path.join(plugin_loc, 'decompilation.json')
@@ -90,6 +90,6 @@ class Plugin:
             with open(input_file, 'r') as fj:
                 decompiled_methods = json.loads(fj.read())
         except IOError as e:
-            print "[x] Failed to read decompilation file: {}".format(e)
+            print("[x] Failed to read decompilation file: {}".format(e))
 
         return decompiled_methods

@@ -25,18 +25,18 @@ def main():
     decompilation_d = {}
 
     if len(sys.argv) < 2:
-        print "Usage: {} <SWFFILE>".format(sys.argv[0])
+        print("Usage: {} <SWFFILE>".format(sys.argv[0]))
         sys.exit(1)
     else:
         SWFFILE = sys.argv[1]
 
-    print "[*] Reading file: {}...".format(SWFFILE)
+    print("[*] Reading file: {}...".format(SWFFILE))
 
     try:
         with open(SWFFILE, "rb") as fp:
             swf = f.SWF(fp, False)
     except Exception as e:
-        print "[x] FFDEC: Failed to process the sample file: {}".format(e)
+        print("[x] FFDEC: Failed to process the sample file: {}".format(e))
         return
 
     # -------------------------------------------
@@ -50,16 +50,16 @@ def main():
     swf.assignClassesToSymbols()
 
     # General information
-    print "[*] The entry point is {}".format(swf.documentClass)
+    print("[*] The entry point is {}".format(swf.documentClass))
 
     # This is roughly equivalent to instance names in SWIFFAS
     as3packs = swf.getAS3Packs()
     for as3pack in as3packs:
-        print "- {}".format(as3pack.nameWithNamespaceSuffix)
+        print("- {}".format(as3pack.nameWithNamespaceSuffix))
 
     for tag in swf.abcList:
         try:
-            print "TAG: {}".format(tag)
+            print("TAG: {}".format(tag))
             decompilation_d[tag.name] = {}
 
             # AS3 ByteCode!
@@ -87,14 +87,14 @@ def main():
                 decompilation_d[tag.name][index] = body.toSource()
 
         except Exception as e:
-            print "[x] Failed to process tag {}: {}".format(tag, e)
+            print("[x] Failed to process tag {}: {}".format(tag, e))
 
-    print "[*] Dumping decompiled methods to a JSON file..."
+    print("[*] Dumping decompiled methods to a JSON file...")
 
     with open('decompilation.json', 'w') as fp:
         fp.write(json.dumps(decompilation_d))
 
-    print "[*] Done."
+    print("[*] Done.")
 
     # Sometimes this hangs in there
     # and needs some help exiting :)

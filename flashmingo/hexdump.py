@@ -30,9 +30,9 @@ def hexdump(data, block_size=16):
             padding = " " * (2 * delta)
             hex_chunk += padding
 
-        print "{hex}\t{asc}".format(
+        print("{hex}\t{asc}".format(
             hex=hex_chunk,
-            asc=chunk)
+            asc=chunk))
 
         if b > data_len:
             break

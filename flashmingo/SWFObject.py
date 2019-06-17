@@ -53,7 +53,7 @@ class SWFObject:
 
     def __init__(self, filename, ml=None):
         if not ml:
-            print 'No logging facility'
+            print('No logging facility')
             raise ValueError
 
         if not filename:
@@ -68,7 +68,7 @@ class SWFObject:
         # Actionscript ByteCode (ABC) tags 
         # are very important for obvious reasons
         self.abcs = self.get_all_abcs()
-        self.abc_list = self.abcs.values()
+        self.abc_list = list(self.abcs.values())
 
         self.instance_info = self.get_all_instances_info()
         self.namespaces = self.get_namespaces()
@@ -267,7 +267,7 @@ class SWFObject:
                 else:
                     mn_ns = 'unk NS'
 
-                for instance_name in self.instance_info.keys():
+                for instance_name in list(self.instance_info.keys()):
                     if mn_ns in instance_name:
                         # This may seem convoluted but it allows to match
                         # XXX and FilePrivateNS:XXX
@@ -411,7 +411,7 @@ class SWFObject:
         # Get ABC's name
         abc_name = ''
 
-        for name, abc in self.abcs.iteritems():
+        for name, abc in self.abcs.items():
             if mo.abc == abc:
                 abc_name = name
                 break
@@ -542,7 +542,7 @@ class SWFObject:
             The instance name associated with this method or None
         """
 
-        for instance_name, ii in self.instance_info.iteritems():
+        for instance_name, ii in self.instance_info.items():
             if method_name in ii['methods']:
                 return instance_name
 
@@ -582,7 +582,7 @@ class SWFObject:
             if not ins._fields:
                 instructions.append("{}".format(ins._name))
             else:
-                pretty_fields = map(lambda f: "{}: {}".format(f, ins.__dict__[f]), ins._fields)
+                pretty_fields = ["{}: {}".format(f, ins.__dict__[f]) for f in ins._fields]
                 instructions.append("{} ({})".format(ins._name, pretty_fields))
 
         return instructions
@@ -593,10 +593,10 @@ class SWFObject:
         This is a development helper to get debug information 
         regarding an ActionScript ByteCode instruction.
         """
-        print ins._name
+        print(ins._name)
 
         for x in ins._fields:
-            print ' -', x, ins.__dict__[x]
+            print(' -', x, ins.__dict__[x])
 
     def find_simple_loops(self, method_name):
         """Finds simple loops within a method
