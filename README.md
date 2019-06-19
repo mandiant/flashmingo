@@ -2,9 +2,13 @@
 
 ## Install
 
-Install the Python (2.7) packages listed in `requirements.txt`.
+> NOTE: The following instructions are for Python3.
+>
+> If you need to install FLASHMINGO on Python2.7 you can checkout the release 1.0 under the _releases_ tab. The installation steps are essentially the same.
 
-You can use the following command: `pip install -r requirements.txt`
+Install the Python3 packages listed in `requirements.txt`.
+
+You can use the following command: `pip3 install -r requirements.txt`
 
 If you want to use the decompilation functionality you need to install [Jython](https://www.jython.org/). Ubuntu/Debian users can issue `apt install jython`
 
